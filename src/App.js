@@ -10,13 +10,13 @@ const truncate = (input, len) =>
 
 export const StyledButton = styled.button`
   padding: 10px;
-  border-radius: 50px;
+  border-radius: 30px;
   border: none;
   background-color: var(--secondary);
   padding: 10px;
   font-weight: bold;
   color: var(--secondary-text);
-  width: 100px;
+  width: none;
   cursor: pointer;
   box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
   -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
@@ -76,7 +76,7 @@ export const StyledLogo = styled.img`
 
 export const StyledImg = styled.img`
   box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
-  border: 4px dashed var(--secondary);
+  border: 8px double var(--secondary);
   background-color: var(--accent);
   border-radius: 100%;
   width: 200px;
@@ -99,7 +99,7 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
+  const [feedback, setFeedback] = useState(`Click MINT to mint your NFT.`);
   const [mintAmount, setMintAmount] = useState(1);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
@@ -139,13 +139,13 @@ function App() {
       })
       .once("error", (err) => {
         console.log(err);
-        setFeedback("Sorry, something went wrong please try again later.");
+        setFeedback("Sorry, something went wrong please try again.");
         setClaimingNft(false);
       })
       .then((receipt) => {
         console.log(receipt);
         setFeedback(
-          `WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
+          `WOW, your ${CONFIG.NFT_NAME} minted successfully! go visit Opensea.io to view it.`
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
@@ -162,8 +162,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 10) {
-      newMintAmount = 10;
+    if (newMintAmount > 20) {
+      newMintAmount = 20;
     }
     setMintAmount(newMintAmount);
   };
@@ -216,14 +216,14 @@ function App() {
               backgroundColor: "var(--accent)",
               padding: 24,
               borderRadius: 24,
-              border: "4px dashed var(--secondary)",
+              border: "8px double var(--secondary)",
               boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
             <s.TextTitle
               style={{
                 textAlign: "center",
-                fontSize: 50,
+                fontSize: 80,
                 fontWeight: "bold",
                 color: "var(--accent-text)",
               }}
@@ -260,6 +260,7 @@ function App() {
               </>
             ) : (
               <>
+              
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
@@ -270,14 +271,41 @@ function App() {
                 <s.TextDescription
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  Excluding gas fees.
+
+
+
+
+<StyledButton
+                      onClick={(e) => {window.open('https://twitter.com/madcamelsnfts', '_blank');}}
+                      
+                    >
+                      Twitter <i class="fa-brands fa-twitter"></i>
+                    </StyledButton>
+
+                    <StyledButton
+                      onClick={(e) => {window.open('https://discord.com/invite/8P3F6vj8Re', '_blank');}}
+                    >
+                      Discord <i class="fa-brands fa-discord"></i>
+                    </StyledButton>
+                    
+                    <br></br><br></br>
+
+
+
+
+                    
+                  
+                  Max 20 Mint per wallet
                 </s.TextDescription>
+            
+            
                 <s.SpacerSmall />
                 {blockchain.account === "" ||
                 blockchain.smartContract === null ? (
                   <s.Container ai={"center"} jc={"center"}>
                     <s.TextDescription
                       style={{
+                        
                         textAlign: "center",
                         color: "var(--accent-text)",
                       }}
@@ -292,8 +320,9 @@ function App() {
                         getData();
                       }}
                     >
-                      CONNECT
+                      CONNECT METAMASK
                     </StyledButton>
+
                     {blockchain.errorMsg !== "" ? (
                       <>
                         <s.SpacerSmall />
@@ -360,7 +389,7 @@ function App() {
                           getData();
                         }}
                       >
-                        {claimingNft ? "BUSY" : "BUY"}
+                        {claimingNft ? "Loading.." : "MINT"}
                       </StyledButton>
                     </s.Container>
                   </>
@@ -371,6 +400,9 @@ function App() {
           </s.Container>
           <s.SpacerLarge />
           <s.Container flex={1} jc={"center"} ai={"center"}>
+
+          
+          
             <StyledImg
               alt={"example"}
               src={"/config/images/example.gif"}
