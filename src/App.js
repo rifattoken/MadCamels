@@ -276,7 +276,7 @@ function App() {
 
 
 <StyledButton
-                      onClick={(e) => {window.open('https://twitter.com/imrifatking', '_blank');}}
+                      onClick={(e) => {window.open('https://twitter.com/madcamelsnfts', '_blank');}}
                       
                     >
                       Twitter <i class="fa-brands fa-twitter"></i>
