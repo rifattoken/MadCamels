@@ -11,7 +11,7 @@
   "MAX_SUPPLY": 4500,
   "WEI_COST": 18000000000000000,
   "DISPLAY_COST": 0.018,
-  "GAS_LIMIT": 130000,
+  "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
   "MARKETPLACE_LINK": "https://opensea.io/collection/madcamels",
   "SHOW_BACKGROUND": true
